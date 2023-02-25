@@ -1,17 +1,25 @@
-const app = require('./server.js');
-const db = require('../db');
-const port = 3030;
-
-app.listen(port, () => {
-  console.log(`[SERVER] Running on http://localhost:${port}/`);
-});
+require('dotenv').config();
 
 const express = require('express');
-const morgan = require('morgan');
 const cors = require('cors');
 
 const app = express();
-
-app.use(morgan('dev'));
+app.disable('x-powered-by');
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+const userRouter = require('./routers/User');
+app.use('/user', userRouter);
+
+// const scoreRouter = require('./routers/Score');
+// app.use('/score', scoreRouter);
+
+app.get('*', (req, res) => {
+  res.json({ ok: true });
+});
+
+const port = process.env.PORT || 4000;
+app.listen(port, () => {
+  console.log(`\n Server is running on http://localhost:${port}\n`);
+});
