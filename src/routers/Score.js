@@ -1,9 +1,17 @@
 const express = require('express');
-const { createScore, getAllScores } = require('../controllers/Score');
+const {
+  createScore,
+  getAllScores,
+  createScoreSheet,
+  createScoredSong,
+  getScoreSheetsByUserId,
+} = require('../controllers/Score');
 
 const router = express.Router();
 
 router.post('/', createScore);
-router.get('/', getAllScores);
+router.post('/:id', createScoreSheet);
+router.post('/score-sheet', createScoredSong);
+router.get('/:id', getScoreSheetsByUserId);
 
 module.exports = router;

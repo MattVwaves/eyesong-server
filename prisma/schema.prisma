@@ -14,14 +14,15 @@ datasource db {
 }
 
 model User {
-  id              Int      @id @default(autoincrement())
-  username        String   @unique @db.VarChar(10)
+  id              Int          @id @default(autoincrement())
+  username        String       @unique @db.VarChar(10)
   password        String
-  starSign        String?  @default("Taurus")
-  favouriteAnimal String?  @default("cat")
+  starSign        String?      @default("Taurus")
+  favouriteAnimal String?      @default("cat")
   score           Score[]
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  ScoreSheet      ScoreSheet[]
 }
 
 model Score {
@@ -32,4 +33,27 @@ model Score {
   value     Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model ScoreSheet {
+  id          Int          @id @default(autoincrement())
+  userId      Int
+  user        User         @relation(fields: [userId], references: [id])
+  scoredSongs ScoredSong[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model ScoredSong {
+  id           Int        @id @default(autoincrement())
+  scoreSheetId Int
+  scoreSheet   ScoreSheet @relation(fields: [scoreSheetId], references: [id])
+  videoId      String
+  songNumber   Int
+  artistName   String
+  songTitle    String
+  decade       String
+  score        Int
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 }
