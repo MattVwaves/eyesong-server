@@ -41,29 +41,33 @@ const createScoreSheet = async (req, res) => {
     return;
   }
 
-  const scoreSheet = await prisma.scoreSheet.create({
-    data: {
-      user: {
-        connect: {
-          id: Number(id),
+  try {
+    const scoreSheet = await prisma.scoreSheet.create({
+      data: {
+        user: {
+          connect: {
+            id: Number(id),
+          },
+        },
+        scoredSongs: {
+          create: {
+            videoId,
+            songNumber,
+            artistName,
+            songTitle,
+            decade,
+            score,
+          },
         },
       },
-      scoredSongs: {
-        create: {
-          videoId,
-          songNumber,
-          artistName,
-          songTitle,
-          decade,
-          score,
-        },
+      include: {
+        scoredSongs: true,
       },
-    },
-    include: {
-      scoredSongs: true,
-    },
-  });
-  res.json({ scoreSheet });
+    });
+    res.json({ scoreSheet });
+  } catch (e) {
+    return res.status(500).json({ error: 'server error' });
+  }
 };
 
 const createScoredSong = async (req, res) => {
