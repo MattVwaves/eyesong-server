@@ -64,6 +64,8 @@ const login = async (req, res) => {
   });
 };
 
+const getUserById = async (req, res) => {};
+
 module.exports = {
   register,
   login,

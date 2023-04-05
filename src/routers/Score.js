@@ -1,9 +1,9 @@
-// const express = require('express');
-// const {} = require('../controllers/Score');
+const express = require('express');
+const { createScore, getAllScores } = require('../controllers/Score');
 
-// const router = express.Router();
+const router = express.Router();
 
-// // router.post('/', createScore);
-// // router.get('/', getAllScores);
+router.post('/', createScore);
+router.get('/', getAllScores);
 
-// module.exports = router;
+module.exports = router;
