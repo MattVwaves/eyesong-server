@@ -32,14 +32,14 @@ const createScoreSheet = async (req, res) => {
 
   const { videoId, songNumber, artistName, songTitle, decade, score } =
     req.body;
-  const token = req.headers.authorization.split(' ')[1];
+  // const token = req.headers.authorization.split(' ')[1];
 
-  try {
-    jwt.verify(token, secret);
-  } catch (e) {
-    res.status(401).json({ error: 'Invalid token provided' });
-    return;
-  }
+  // try {
+  //   jwt.verify(token, secret);
+  // } catch (e) {
+  //   res.status(401).json({ error: 'Invalid token provided' });
+  //   return;
+  // }
 
   try {
     const scoreSheet = await prisma.scoreSheet.create({
