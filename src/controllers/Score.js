@@ -43,7 +43,7 @@ const createScoreSheet = async (req, res) => {
   }
 
   try {
-    const scoreSheet = await prisma.scoreSheet.create({
+    const scoreSheet = await prisma.scoresheet.create({
       data: {
         user: {
           connect: {

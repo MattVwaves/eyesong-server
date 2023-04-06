@@ -22,7 +22,7 @@ model User {
   score           Score[]
   createdAt       DateTime     @default(now())
   updatedAt       DateTime     @updatedAt
-  ScoreSheet      ScoreSheet[]
+  ScoreSheet      Scoresheet[]
 }
 
 model Score {
@@ -34,7 +34,7 @@ model Score {
   updatedAt DateTime @updatedAt
 }
 
-model ScoreSheet {
+model Scoresheet {
   id          Int          @id @default(autoincrement())
   userId      Int
   user        User         @relation(fields: [userId], references: [id])
@@ -45,8 +45,8 @@ model ScoreSheet {
 
 model ScoredSong {
   id           Int        @id @default(autoincrement())
-  scoreSheetId Int
-  scoreSheet   ScoreSheet @relation(fields: [scoreSheetId], references: [id])
+  scoresheetId Int
+  scoreSheet   Scoresheet @relation(fields: [scoresheetId], references: [id])
   videoId      String
   songNumber   Int
   artistName   String
