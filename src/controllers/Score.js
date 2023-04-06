@@ -27,8 +27,8 @@ const getScoreSheetsByUserId = async (req, res) => {
   res.json({ scoreSheets });
 };
 
-const createScoreSheet = async (req, res) => {
-  const { id } = req.params;
+const createScoresheet = async (req, res) => {
+  const { id } = req.body;
   console.log(id);
 
   // const { videoId, songNumber, artistName, songTitle, decade, score } =
@@ -130,7 +130,7 @@ const getAllScores = async (req, res) => {
 module.exports = {
   createScore,
   getAllScores,
-  createScoreSheet,
+  createScoresheet,
   createScoredSong,
   getScoreSheetsByUserId,
 };

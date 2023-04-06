@@ -13,8 +13,8 @@ const userRouter = require('./routers/User');
 app.use('/user', userRouter);
 const scoreRouter = require('./routers/Score');
 app.use('/score', scoreRouter);
-const scoredSongRouter = require('./routers/ScoredSong');
-app.use('/score-sheet', scoredSongRouter);
+const scoresheetRouter = require('./routers/Scoresheet');
+app.use('/scoresheet', scoresheetRouter);
 
 app.get('*', (req, res) => {
   res.json({ ok: true });
