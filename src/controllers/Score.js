@@ -99,14 +99,8 @@ const createScore = async (req, res) => {
   res.json({ scoredSong });
 };
 
-const getAllScores = async (req, res) => {
-  const scores = await prisma.score.findMany();
-  res.json({ scores });
-};
-
 module.exports = {
   createScore,
-  getAllScores,
   createScoresheet,
   getScoresheetsByUserId,
 };
