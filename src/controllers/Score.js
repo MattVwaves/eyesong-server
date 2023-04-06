@@ -98,7 +98,7 @@ const createScoredSong = async (req, res) => {
 };
 
 const createScore = async (req, res) => {
-  const { value, userId, userName } = req.body;
+  const { value, id } = req.body;
   const token = req.headers.authorization.split(' ')[1];
 
   try {
@@ -110,10 +110,9 @@ const createScore = async (req, res) => {
   const createdScore = await prisma.score.create({
     data: {
       value,
-      userName,
       user: {
         connect: {
-          id: Number(userId),
+          id: Number(id),
         },
       },
     },
