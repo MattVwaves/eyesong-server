@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 const secret = process.env.JWT_SECRET;
 
 const getScoresheetsByUserId = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
   const token = req.headers.authorization.split(' ')[1];
 
   try {

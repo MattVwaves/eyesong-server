@@ -9,6 +9,6 @@ const router = express.Router();
 
 router.post('/', createScoresheet);
 router.post('/:id/', createScore);
-router.get('/', getScoresheetsByUserId);
+router.get('/:id', getScoresheetsByUserId);
 
 module.exports = router;
