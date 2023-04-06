@@ -68,7 +68,7 @@ const createScoresheet = async (req, res) => {
   }
 };
 
-const createScoredSong = async (req, res) => {
+const createScore = async (req, res) => {
   const { id } = req.params;
   const { videoId, songNumber, artistName, songTitle, decade, score } =
     req.body;
@@ -81,7 +81,7 @@ const createScoredSong = async (req, res) => {
     return;
   }
 
-  const scoredSong = await prisma.scoredSong.create({
+  const scoredSong = await prisma.song.create({
     data: {
       videoId,
       songNumber,
@@ -89,35 +89,39 @@ const createScoredSong = async (req, res) => {
       songTitle,
       decade,
       score,
-      scoreSheetId: Number(id),
-    },
-  });
-  res.json({ scoredSong });
-};
-
-const createScore = async (req, res) => {
-  const { value, id } = req.body;
-  const token = req.headers.authorization.split(' ')[1];
-
-  try {
-    jwt.verify(token, secret);
-  } catch (e) {
-    res.status(401).json({ error: 'Invalid token provided' });
-  }
-
-  const createdScore = await prisma.score.create({
-    data: {
-      value,
-      user: {
+      scoresheet: {
         connect: {
           id: Number(id),
         },
       },
     },
   });
-
-  res.json({ createdScore });
+  res.json({ scoredSong });
 };
+
+// const createScore = async (req, res) => {
+//   const { value, id } = req.body;
+//   const token = req.headers.authorization.split(' ')[1];
+
+//   try {
+//     jwt.verify(token, secret);
+//   } catch (e) {
+//     res.status(401).json({ error: 'Invalid token provided' });
+//   }
+
+//   const createdScore = await prisma.score.create({
+//     data: {
+//       value,
+//       user: {
+//         connect: {
+//           id: Number(id),
+//         },
+//       },
+//     },
+//   });
+
+//   res.json({ createdScore });
+// };
 
 const getAllScores = async (req, res) => {
   const scores = await prisma.score.findMany();
@@ -128,6 +132,5 @@ module.exports = {
   createScore,
   getAllScores,
   createScoresheet,
-  createScoredSong,
   getScoreSheetsByUserId,
 };

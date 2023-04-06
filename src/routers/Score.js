@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.post('/', createScore);
 // router.post('/:id', createScoreSheet);
-router.post('/score-sheet', createScoredSong);
+// router.post('/score-sheet', createScoredSong);
 router.get('/:id', getScoreSheetsByUserId);
 
 module.exports = router;
