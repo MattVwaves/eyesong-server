@@ -28,11 +28,8 @@ const getScoreSheetsByUserId = async (req, res) => {
 };
 
 const createScoresheet = async (req, res) => {
-  const { id } = req.body;
-  console.log(id);
-
-  // const { videoId, songNumber, artistName, songTitle, decade, score } =
-  //   req.body;
+  const { id, videoId, songNumber, artistName, songTitle, decade, score } =
+    req.body;
   const token = req.headers.authorization.split(' ')[1];
 
   try {
@@ -50,20 +47,20 @@ const createScoresheet = async (req, res) => {
             id: Number(id),
           },
         },
-        // scoredSongs: {
-        //   create: {
-        //     videoId,
-        //     songNumber,
-        //     artistName,
-        //     songTitle,
-        //     decade,
-        //     score,
-        //   },
-        // },
+        songs: {
+          create: {
+            videoId,
+            songNumber,
+            artistName,
+            songTitle,
+            decade,
+            score,
+          },
+        },
       },
-      // include: {
-      //   scoredSongs: true,
-      // },
+      include: {
+        songs: true,
+      },
     });
     res.json({ scoreSheet });
   } catch (e) {
