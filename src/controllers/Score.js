@@ -4,8 +4,8 @@ const prisma = new PrismaClient();
 
 const secret = process.env.JWT_SECRET;
 
-const getScoreSheetsByUserId = async (req, res) => {
-  const { id } = req.params;
+const getScoresheetsByUserId = async (req, res) => {
+  const { id } = req.body;
   const token = req.headers.authorization.split(' ')[1];
 
   try {
@@ -15,12 +15,12 @@ const getScoreSheetsByUserId = async (req, res) => {
     return;
   }
 
-  const scoreSheets = await prisma.scoreSheet.findMany({
+  const scoreSheets = await prisma.scoresheet.findMany({
     where: {
       userId: Number(id),
     },
     include: {
-      scoredSongs: true,
+      songs: true,
     },
   });
 
@@ -99,30 +99,6 @@ const createScore = async (req, res) => {
   res.json({ scoredSong });
 };
 
-// const createScore = async (req, res) => {
-//   const { value, id } = req.body;
-//   const token = req.headers.authorization.split(' ')[1];
-
-//   try {
-//     jwt.verify(token, secret);
-//   } catch (e) {
-//     res.status(401).json({ error: 'Invalid token provided' });
-//   }
-
-//   const createdScore = await prisma.score.create({
-//     data: {
-//       value,
-//       user: {
-//         connect: {
-//           id: Number(id),
-//         },
-//       },
-//     },
-//   });
-
-//   res.json({ createdScore });
-// };
-
 const getAllScores = async (req, res) => {
   const scores = await prisma.score.findMany();
   res.json({ scores });
@@ -132,5 +108,5 @@ module.exports = {
   createScore,
   getAllScores,
   createScoresheet,
-  getScoreSheetsByUserId,
+  getScoresheetsByUserId,
 };

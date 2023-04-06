@@ -11,8 +11,8 @@ app.use(express.urlencoded({ extended: true }));
 
 const userRouter = require('./routers/User');
 app.use('/user', userRouter);
-const scoreRouter = require('./routers/Score');
-app.use('/score', scoreRouter);
+// const scoreRouter = require('./routers/Score');
+// app.use('/score', scoreRouter);
 const scoresheetRouter = require('./routers/Scoresheet');
 app.use('/scoresheet', scoresheetRouter);
 
