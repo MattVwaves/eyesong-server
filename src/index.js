@@ -7,7 +7,7 @@ const app = express();
 app.disable('x-powered-by');
 app.use(
   cors({
-    origin: '*',
+    origin: 'https://eyesong-client.onrender.com/',
   })
 );
 app.use(express.json());
